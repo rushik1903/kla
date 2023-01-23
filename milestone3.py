@@ -125,20 +125,20 @@ def checkSimilaritySub(poly1,poly2):
 def checkSimilarity(poly1,poly2):
     if(len(poly1)!=len(poly2)):
         return False
-    # for j in range(len(poly1),2):
-    #     print("1",end='')
-    #     tempPoly = []
-    #     for k in range(len(poly1),2):
-    #         print("2",end='')
-    #         x=k+j
-    #         if(x > len(poly1)):
-    #             x = k+j-len(poly1)
-    #         tempPoly.append(poly1[x])
-    #         tempPoly.append(poly1[x+1])
-    #     if(len(tempPoly)>0):
-    #         print("h",end='')
-    if(checkSimilaritySub(poly1,poly2) == True):
-        return True
+    for j in range(0,len(poly1),2):
+        print("1",end='')
+        tempPoly = [] 
+        for k in range(0,len(poly1),2):
+            print("2",end='')
+            x=k+j
+            if(x > len(poly1)):
+                x = k+j-len(poly1)
+            tempPoly.append(poly1[x])
+            tempPoly.append(poly1[x+1])
+        if(len(tempPoly)>0):
+            print("h",end='')
+        if(checkSimilaritySub(poly1,poly2) == True):
+            return True
     return False
 
 res=[]

@@ -1,2 +1,2 @@
-
-#     for polygon[4]
+len(poly1)):
+    
