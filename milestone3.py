@@ -77,7 +77,7 @@ def cross(a,b,c):
     return np.cross(v1,v2)
 
 def dist(a,b):
-    return math.sqrt((a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*((a[1]-b[1])))
+    return math.sqrt((a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1]))
 
 
 def convertFromPolyToArray(poly):
@@ -100,6 +100,27 @@ def convertFromPolyToArray(poly):
         res.append(cross(a,b,c))
     return res
 
+def checkSimilaritySub(poly1,poly2):
+    for i in range(0,len(poly1),2):
+        if(poly1[i] != poly2[i]):
+            return False
+        for j in range(len(poly1[i+1])):
+            if(poly1[i+1][j] != poly2[i+1][j]):
+                return False
+    return True
+def checkSimilarity(poly1,poly2):
+    if(len(poly1)!=len(poly2)):
+        return False
+    for i in range(0,len(poly1),2):
+        temp=[]
+        for j in range(len(poly1)):
+            x=i+j
+            if(x>=len(poly1)):
+                x-=len(poly1)
+            temp.append(poly1[x])
+        if(checkSimilaritySub(temp,poly2) == True):
+            return True
+    return False
 
 
 
@@ -114,33 +135,6 @@ for poly in poi:
     poiCmpArray.append(convertFromPolyToArray(poly))
 
 
-def checkSimilaritySub(poly1,poly2):
-    for i in range(0,len(poly1),2):
-        if(poly1[i] != poly2[i]):
-            return False
-        for j in range(len(poly1[i+1])):
-            if(poly1[i+1][j] != poly2[i+1][j]):
-                return False
-    return True
-def checkSimilarity(poly1,poly2):
-    if(len(poly1)!=len(poly2)):
-        return False
-    for j in range(0,len(poly1),2):
-        print("1",end='')
-        tempPoly = [] 
-        for k in range(0,len(poly1),2):
-            print("2",end='')
-            x=k+j
-            if(x > len(poly1)):
-                x = k+j-len(poly1)
-            tempPoly.append(poly1[x])
-            tempPoly.append(poly1[x+1])
-        if(len(tempPoly)>0):
-            print("h",end='')
-        if(checkSimilaritySub(poly1,poly2) == True):
-            return True
-    return False
-
 res=[]
 total=0
 
@@ -150,4 +144,4 @@ for i in range(len(sourceCmpArray)):
             res.append(i)
             total+=1
 print(total)
-writePolysToFile("mile2.txt",source,res,poiHeader,poiFooter)
+writePolysToFile("mile5.txt",source,res,poiHeader,poiFooter)
