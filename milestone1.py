@@ -6,6 +6,7 @@ while(data != "boundary\n"):
     header+=data
     data = file.readline()
 
+#stores polygons in string format
 polygons = []
 temp = []
 while(data != "endstr\n"):
@@ -18,10 +19,34 @@ while(data != "endstr\n"):
     else:
         temp.append(data)
     data = file.readline()
+footer = ""
+while(data != ""):
+    footer+=data
+    data = file.readline()
+#this variable stores all my polygons in int format
+polys = []
+for polygon in polygons:
+    temp = []
+    print(polygon[3].split())
+    items = polygon[3].split()
+    for i in range(1,len(items)):
+        temp.append(int(items[i]))
+    polys.append(temp)
+# print(polys)
+
 
 print(header)
-for i in range(2):
-    for item in polygons[i]:
-        print(item,end='')
-# print(polygons)
+print(polygons)
 file.close()
+
+f = open("mile1.txt", "w")
+f.write(header)
+i=0
+for polygon in polygons:
+    i+=1
+    if(i==3):
+        break
+    for item in polygon:
+        f.write(item)
+f.write(footer)
+f.close()
